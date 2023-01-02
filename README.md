@@ -1,12 +1,9 @@
 # catchGame
 plugin for mc 1.19.0
 
-
-
-
 You need to creata a table with the collums uuid, highscore and totalTime
-Example:
 
+Example:
 
 create or replace table mc(
                          uuid VARCHAR(40) PRIMARY KEY ,
