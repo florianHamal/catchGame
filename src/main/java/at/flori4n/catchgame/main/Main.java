@@ -1,6 +1,8 @@
 package at.flori4n.catchgame.main;
 
 import at.flori4n.catchgame.data.DatabaseHandler;
+import at.flori4n.catchgame.data.GameData;
+import at.flori4n.catchgame.listeners.InventoryClickListener;
 import at.flori4n.catchgame.listeners.PlayerDamagedListener;
 import at.flori4n.catchgame.listeners.PlayerJoinListener;
 import at.flori4n.catchgame.listeners.PlayerQuitListener;
@@ -19,6 +21,7 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new PlayerQuitListener(gameManager),this);
         pluginManager.registerEvents(new PlayerJoinListener(gameManager),plugin);
         pluginManager.registerEvents(new PlayerDamagedListener(gameManager),this);
+        pluginManager.registerEvents(new InventoryClickListener(),this);
         saveDefaultConfig();
         DatabaseHandler.getInstance().setupConnection(
                 getConfig().getString("ip"),
@@ -27,6 +30,12 @@ public class Main extends JavaPlugin {
                 getConfig().getString("password"),
                 getConfig().getString("database"),
                 getConfig().getString("tableName"));
+    }
+    @Override
+    public void onDisable(){
+        if (GameData.getInstance().isGameRunning()){
+            gameManager.stopGame();
+        }
     }
     public static Main getPlugin(){
         return plugin;

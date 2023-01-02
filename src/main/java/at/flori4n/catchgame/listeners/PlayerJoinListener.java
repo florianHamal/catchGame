@@ -23,6 +23,7 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
         Player player = event.getPlayer();
+        player.getInventory().setHelmet(null);//in case of a server crash to clear the helmet on rejoin
         databaseHandler.loadPlayerStats(player);
         FastBoard scoreboard = new FastBoard(player);
         scoreboard.updateTitle(ChatColor.GOLD+"Catch Game");
