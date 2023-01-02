@@ -1,0 +1,6 @@
+name: CatchGame
+version: '${version}'
+main: at.flori4n.catchgame.main.Main
+api-version: 1.19
+authors: [ flori4n ]
+description: plugin for playing catch
